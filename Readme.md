@@ -1,21 +1,13 @@
 # Historias de usuario
+- Como vendedor quiero iniciar sesión con mi usuario y contraseña para acceder a las funcionalidades del sistema. (1)
+- Como vendedor quiero poder cerrar sesión para proteger mi cuenta y salir de forma segura del sistema. (1)
+- Como vendedor quiero registrar una nueva venta para mantener actualizado el historial de ventas del sistema. (3)
+- Como vendedor quiero ver una vista previa de la venta antes de confirmarla, para verificar que todos los productos y datos sean correctos. (3)
+- Como vendedor quiero modificar la venta (productos adicionales, cambiar delivery, etc) para tener un seguimiento de la venta. (5)
+- Como vendedor quiero poder eliminar ventas incorrectas o duplicadas para mantener un registro limpio y preciso. (2)
+- Como vendedor quiero acceder a una página con el historial de ventas y filtros de búsqueda para consultar y analizar las transacciones registradas. (5)
 
-- Como vendedor quiero tener un usuario y contraseña para poder interactuar con la aplicación
-
-- Como vendedor quiero tener un botón para poder salir del sistema.
-
-- Como vendedor quiero registrar una venta para actualizar el registro general de ventas
-
-- Como vendedor quiero visualizar una vista previa del registro de la venta para confirmar el registro de cada uno de los productos.
-
-- Como vendedor quiero modificar la venta (productos adicionales, cambiar delivery, etc) para tener un seguimiento de la venta
-
-- Como vendedor quiero eliminar las ventas erróneas o no necesarias para tener una lista limpia.
-
-- Como vendedor quiero tener una página con el registro de todas las ventas (con filtros) para tener un registro completo de ventas.
-
-- Como administrador quiero registrar todas los gastos realizadas para poder consultarlas posteriormente
-
-- Como administrador quiero una vista de los gastos para tener un control.
-
-- Como administrador quiero eliminar los gastos erróneos o no necesarios para tener una lista limpia.
+# Librerías a utilizar
+- Papa Parse (https://www.papaparse.com/): Librería para manipular archivos CSV.
+- Tailwindcss (https://tailwindcss.com/) : Librería de estilos CSS.
+- Sweetalert (https://sweetalert2.github.io/): Librería de alertas estilizadas.
