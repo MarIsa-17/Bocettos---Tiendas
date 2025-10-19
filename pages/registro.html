@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Registro</title>
+        <style>
+        .login-bg {
+            
+            background-image: url('/assets/fondo.jpg'); 
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="login-bg h-screen flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-white/50"></div>
+    <div class="bg-white/90 backdrop-blur-sm pt-16 pb-12 px-10 rounded-lg shadow-2xl max-w-sm w-full mx-auto">
+        
+        <img src="/assets/logo-black.svg" class="logo-box text-black py-3 px-4 rounded mb-8 text-center font-semibold tracking-wider cursor-pointer"/>
+        
+            
+        
+        <form action="#" method="POST">
+            
+            <div class="mb-4">
+                <input 
+                    type="text" 
+                    name="usuario" 
+                    id="usuario" 
+                    placeholder="usuario" 
+                    required 
+                    class="w-full px-4 py-2 border border-gray-400 rounded focus:outline-none focus:ring-1 focus:ring-gray-600 placeholder-gray-600 text-base"
+                >
+            </div>
+
+            <div class="mb-4">
+                <input 
+                    type="password" 
+                    name="password" 
+                    id="password" 
+                    placeholder="password" 
+                    required 
+                    class="w-full px-4 py-2 border border-gray-400 rounded focus:outline-none focus:ring-1 focus:ring-gray-600 placeholder-gray-600 text-base"
+                >
+            </div>
+            <div class="mb-8">
+                <input 
+                    type="password" 
+                    name="confirmPassword" 
+                    id="confirmPassword" 
+                    placeholder="confirm password" 
+                    required 
+                    class="w-full px-4 py-2 border border-gray-400 rounded focus:outline-none focus:ring-1 focus:ring-gray-600 placeholder-gray-600 text-base"
+                >
+            </div>
+            
+            
+            <div class="text-center text-sm">
+                ¿Ya tiene usuario? 
+                <a href="/index.html" class="text-indigo-700 hover:text-indigo-900 font-medium">Ingrese aquí</a>
+            </div>
+            
+        </form>
+   </div>
+
+</body>
+</html>
