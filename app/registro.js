@@ -1,10 +1,7 @@
+import { cargarUsuarios } from "./utils"
+
 const formulario = document.getElementById('formulario-registro')
 formulario.addEventListener('submit', manejarRegistro)
-
-function cargarUsuarios (){
-    const usuarios = localStorage.getItem('usuarios')
-    return usuarios ? JSON.parse(usuarios) : []
-}
 
 function guardarUsuarios(usuarios) {
     localStorage.setItem('usuarios', JSON.stringify(usuarios))
@@ -35,7 +32,7 @@ function manejarRegistro (event){
     } else {
         usuarios.push(nuevoUsuario)
         guardarUsuarios(usuarios)
-        
+
         Swal.fire({
                 title: '¡Registro Exitoso!',
                 html: 'El usuario fue registrado y guardado localmente en tu navegador (LocalStorage).',
