@@ -7,8 +7,10 @@
 - Como vendedor quiero modificar la venta (productos adicionales, cambiar delivery, etc) para tener un seguimiento de la venta. (5)
 - Como vendedor quiero poder eliminar ventas incorrectas o duplicadas para mantener un registro limpio y preciso. (2)
 - Como vendedor quiero acceder a una página con el historial de ventas y filtros de búsqueda para consultar y analizar las transacciones registradas. (5)
+- Como administrador quiero porder descargar el resumen de ventas en formato csv para poder analizar el flujo de ventas. (2)
 
 # Librerías a utilizar
+
 - Papa Parse (https://www.papaparse.com/): Librería para manipular archivos CSV.
 - Tailwindcss (https://tailwindcss.com/) : Librería de estilos CSS.
 - Sweetalert (https://sweetalert2.github.io/): Librería de alertas estilizadas.
