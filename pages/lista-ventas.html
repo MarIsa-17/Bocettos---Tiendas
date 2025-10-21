@@ -1,105 +1,309 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
     <title>Lista Ventas</title>
     <style>
-        .login-bg {            
-            background-image: url('/assets/fondo.jpg'); 
-            background-size: cover;
-            background-position: center;
-        }
+      .login-bg {
+        background-image: url("/assets/fondo.jpg");
+        background-size: cover;
+        background-position: center;
+      }
     </style>
-</head>
-<body class="login-bg min-h-screen relative">
-
-    <div class="absolute inset-0 bg-white/70"></div> 
+  </head>
+  <body class="login-bg min-h-screen relative">
+    <div class="absolute inset-0 bg-white/70"></div>
 
     <div class="relative z-10 min-h-screen">
-        
-        <header class="flex items-center justify-between p-4 bg-white border-b border-gray-200 shadow-md ">
-           <img src="/assets/logo-black.svg" class="px-6 py-2 w-50"/>
-            
-            <h1 class="text-xl font-bold text-[#1d1d1b]">Lista de Ventas</h1>
-            
-            <button class="bg-[#4A4A4A] text-white px-4 py-2 rounded hover:bg-gray-700 transition duration-150 ease-in-out">
-                Cerrar sesión
+      <header
+        class="flex items-center justify-between p-4 bg-white border-b border-gray-200 shadow-md"
+      >
+        <img src="/assets/logo-black.svg" class="px-6 py-2 w-50" />
+
+        <h1 class="text-xl font-bold text-[#1d1d1b]">Lista de Ventas</h1>
+
+        <button
+          class="bg-[#4A4A4A] text-white px-4 py-2 rounded hover:bg-gray-700 transition duration-150 ease-in-out"
+        >
+          Cerrar sesión
+        </button>
+      </header>
+
+      <main class="p-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+          <div class="flex flex-col">
+            <label
+              for="fecha"
+              class="text-sm bg-[#EAEAEA] px-3 py-1 border border-gray-300 rounded-t"
+              >Fecha</label
+            >
+            <input
+              type="date"
+              id="fechaVenta"
+              class="bg-white px-3 py-2 border border-gray-300 rounded-b focus:outline-none focus:ring-1 focus:ring-gray-500"
+            />
+          </div>
+
+          <div class="flex flex-col">
+            <label
+              for="tipo_entrega"
+              class="text-sm bg-[#EAEAEA] px-3 py-1 border border-gray-300 rounded-t"
+              >Select de Tipo de entrega</label
+            >
+            <select
+              id="tipoEntrega"
+              class="bg-white px-3 py-2 border border-gray-300 rounded-b focus:outline-none focus:ring-1 focus:ring-gray-500"
+            >
+              <option value="">Seleccionar</option>
+            </select>
+          </div>
+
+          <div class="flex flex-col">
+            <label
+              for="canal_venta"
+              class="text-sm bg-[#EAEAEA] px-3 py-1 border border-gray-300 rounded-t"
+              >Canal de venta (select)</label
+            >
+            <select
+              id="canalVenta"
+              class="bg-white px-3 py-2 border border-gray-300 rounded-b focus:outline-none focus:ring-1 focus:ring-gray-500"
+            >
+              <option value="">Seleccionar</option>
+            </select>
+          </div>
+
+          <div class="flex flex-col">
+            <label
+              for="estado_venta"
+              class="text-sm bg-[#EAEAEA] px-3 py-1 border border-gray-300 rounded-t"
+              >Estado de venta (select)</label
+            >
+            <select
+              id="estadoVenta"
+              class="bg-white px-3 py-2 border border-gray-300 rounded-b focus:outline-none focus:ring-1 focus:ring-gray-500"
+            >
+              <option value="">Seleccionar</option>
+            </select>
+          </div>
+
+          <div class="flex flex-col">
+            <button id="botonLimpiarFiltros" type="button" class="bg-[#4A4A4A] text-white px-4 py-2 rounded hover:bg-gray-700 transition duration-150 ease-in-out">
+                Limpiar filtros
             </button>
-        </header>
+          </div>
 
-        <main class="p-8 max-w-7xl mx-auto">
+          <div class="hidden md:block"></div>
+        </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
-                
-                <div class="flex flex-col">
-                    <label for="fecha" class="text-sm bg-[#EAEAEA] px-3 py-1 border border-gray-300 rounded-t">Fecha</label>
-                    <input type="date" id="fecha" class="bg-white px-3 py-2 border border-gray-300 rounded-b focus:outline-none focus:ring-1 focus:ring-gray-500">
-                </div>
+        <div
+          class="overflow-x-auto bg-white border border-gray-300 shadow-md rounded"
+        >
+          <table id="tablaVentas" class="min-w-full divide-y divide-gray-200">
+            <thead>
+              <tr>
+                <th
+                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
+                >
+                  Código de Venta
+                </th>
+                <th
+                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
+                >
+                  DNI Cliente
+                </th>
+                <th
+                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
+                >
+                  Subtotal
+                </th>
+                <th
+                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
+                >
+                  Medio de Pago
+                </th>
+                <th
+                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
+                >
+                  Tipo de entrega
+                </th>
+                <th
+                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
+                >
+                  Canal de venta
+                </th>
+                <th
+                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
+                >
+                  Estado de venta
+                </th>
+                <th
+                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
+                >
+                  Fecha de venta
+                </th>
+                <th
+                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3"
+                >
+                  Acciones
+                </th>
+              </tr>
+            </thead>
+            <tbody id="tablaVentasBody" class="divide-y divide-gray-200">
+              <tr>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-1 flex justify-center">
+                  <button
+                    class="bg-gray-500 text-white text-xs px-2 py-1 rounded hover:bg-gray-600"
+                  >
+                    Mostrar
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-1 flex justify-center">
+                  <button
+                    class="bg-gray-500 text-white text-xs px-2 py-1 rounded hover:bg-gray-600"
+                  >
+                    Mostrar
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-1 flex justify-center">
+                  <button
+                    class="bg-gray-500 text-white text-xs px-2 py-1 rounded hover:bg-gray-600"
+                  >
+                    Mostrar
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-1 flex justify-center">
+                  <button
+                    class="bg-gray-500 text-white text-xs px-2 py-1 rounded hover:bg-gray-600"
+                  >
+                    Mostrar
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-1 flex justify-center">
+                  <button
+                    class="bg-gray-500 text-white text-xs px-2 py-1 rounded hover:bg-gray-600"
+                  >
+                    Mostrar
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-1 flex justify-center">
+                  <button
+                    class="bg-gray-500 text-white text-xs px-2 py-1 rounded hover:bg-gray-600"
+                  >
+                    Mostrar
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-1 flex justify-center">
+                  <button
+                    class="bg-gray-500 text-white text-xs px-2 py-1 rounded hover:bg-gray-600"
+                  >
+                    Mostrar
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-3 border-r border-gray-200"></td>
+                <td class="px-2 py-1 flex justify-center">
+                  <button
+                    class="bg-gray-500 text-white text-xs px-2 py-1 rounded hover:bg-gray-600"
+                  >
+                    Mostrar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-                <div class="flex flex-col">
-                    <label for="tipo_entrega" class="text-sm bg-[#EAEAEA] px-3 py-1 border border-gray-300 rounded-t">Select de Tipo de entrega</label>
-                    <select id="tipo_entrega" class=" bg-white px-3 py-2 border border-gray-300 rounded-b focus:outline-none focus:ring-1 focus:ring-gray-500">
-                        <option value="">Seleccionar</option>
-                        </select>
-                </div>
-                
-                <div class="flex flex-col">
-                    <label for="canal_venta" class="text-sm bg-[#EAEAEA] px-3 py-1 border border-gray-300 rounded-t">Canal de venta (select)</label>
-                    <select id="canal_venta" class="bg-white px-3 py-2 border border-gray-300 rounded-b focus:outline-none focus:ring-1 focus:ring-gray-500">
-                        <option value="">Seleccionar</option>
-                        </select>
-                </div>
-
-                <div class="flex flex-col">
-                    <label for="estado_venta" class="text-sm bg-[#EAEAEA] px-3 py-1 border border-gray-300 rounded-t">Estado de venta (select)</label>
-                    <select id="estado_venta" class="bg-white px-3 py-2 border border-gray-300 rounded-b focus:outline-none focus:ring-1 focus:ring-gray-500">
-                        <option value="">Seleccionar</option>
-                        </select>
-                </div>
-
-                <div class="hidden md:block"></div> 
-
-            </div>
-            
-            <div class="overflow-x-auto bg-white border border-gray-300 shadow-md rounded">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead>
-                        <tr>
-                            <th class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30">Código de Venta</th>
-                            <th class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30">Cantidad</th>
-                            <th class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30">Cliente</th>
-                            <th class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30">Subtotal</th>
-                            <th class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30">Medio de Pago</th>
-                            <th class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30">Tipo de entrega</th>
-                            <th class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30">Canal de venta</th>
-                            <th class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30">Estado de venta</th>
-                            <th class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200">
-                        <tr><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-1 flex justify-center"><button class="bg-gray-500 text-white text-xs px-2 py-1 rounded hover:bg-gray-600">Mostrar</button></td></tr>
-                        <tr><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-1 flex justify-center"><button class="bg-gray-500 text-white text-xs px-2 py-1 rounded hover:bg-gray-600">Mostrar</button></td></tr>
-                        <tr><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-1 flex justify-center"><button class="bg-gray-500 text-white text-xs px-2 py-1 rounded hover:bg-gray-600">Mostrar</button></td></tr>
-                        <tr><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-1 flex justify-center"><button class="bg-gray-500 text-white text-xs px-2 py-1 rounded hover:bg-gray-600">Mostrar</button></td></tr>
-                        <tr><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-1 flex justify-center"><button class="bg-gray-500 text-white text-xs px-2 py-1 rounded hover:bg-gray-600">Mostrar</button></td></tr>
-                        <tr><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-1 flex justify-center"><button class="bg-gray-500 text-white text-xs px-2 py-1 rounded hover:bg-gray-600">Mostrar</button></td></tr>
-                        <tr><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-1 flex justify-center"><button class="bg-gray-500 text-white text-xs px-2 py-1 rounded hover:bg-gray-600">Mostrar</button></td></tr>
-                        <tr><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-3 border-r border-gray-200"></td><td class="px-2 py-1 flex justify-center"><button class="bg-gray-500 text-white text-xs px-2 py-1 rounded hover:bg-gray-600">Mostrar</button></td></tr>
-                        </tbody>
-                </table>
-            </div>
-
-            <div class="flex justify-end mt-6">
-                <button class="bg-red-600 text-white px-6 py-2 rounded shadow-lg hover:bg-red-700 transition duration-150 ease-in-out">
-                    Agregar
-                </button>
-            </div>
-
-        </main>
+        <div class="flex justify-end mt-6">
+          <button
+          id="botonAgregarVenta"
+            class="bg-red-600 text-white px-6 py-2 rounded shadow-lg hover:bg-red-700 transition duration-150 ease-in-out"
+          >
+            Agregar
+          </button>
+        </div>
+      </main>
     </div>
-</body>
-
+  </body>
+  <script type="module" src="/app/utils.js"></script>
+  <script type="module" src="/app/listaVentas.js"></script>
 </html>
