@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
+    <style>
+      .login-bg {
+        background-image: url("/assets/fondo.jpg");
+        background-size: cover;
+        background-position: center;
+      }
+    </style>
+    <title>Detalle de Venta</title>
+  </head>
+  <body class="login-bg min-h-screen relative">
+    <div class="absolute inset-0 bg-white/70"></div>
+
+    <div class="relative z-10 min-h-screen bg-[#F7F7F7]/50">
+      <header
+        class="flex items-center justify-between p-4 bg-white border-b border-gray-200 shadow-lg"
+      >
+        <img src="/assets/logo-black.svg" class="px-6 py-2 w-50" />
+
+        <h1 class="text-xl font-bold text-[#1d1d1b]">Detalle de Venta</h1>
+
+        <button
+          class="bg-[#4A4A4A] text-white px-4 py-2 rounded hover:bg-gray-700 transition duration-150 ease-in-out"
+        >
+          Cerrar sesión
+        </button>
+      </header>
+
+      <main class="p-8 max-w-screen-xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-12">
+          <div class="lg:col-span-2 space-y-10">
+            <div class="bg-white p-6 rounded shadow-xl">
+              <h2
+                class="text-xl font-semibold text-gray-900 border-b pb-2 mb-6"
+              >
+                Datos de Venta
+              </h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                <div class="flex flex-col">
+                  <label
+                    class="text-sm text-gray-700 font-semibold mb-1"
+                    for="canalVenta"
+                    >Canal</label
+                  >
+                  <input
+                    id="canalVenta"
+                    required
+                    disabled
+                    class="w-full bg-white border border-gray-400 text-[#4A4A4A] px-3 py-2 rounded text-base"
+                  ></input>
+                </div>
+                <div class="flex flex-col">
+                  <label
+                    class="text-sm text-gray-700 font-semibold mb-1"
+                    for="tipoVenta"
+                    >Tipo</label
+                  >
+                  <input
+                    id="tipoVenta"
+                    required
+                    disabled
+                    class="w-full bg-white border border-gray-400 text-[#4A4A4A] px-3 py-2 rounded text-base"
+                  ></input>
+                </div>
+                <div class="flex flex-col">
+                  <label
+                    class="text-sm text-gray-700 font-semibold mb-1"
+                    for="medioPago"
+                    >Medio de pago</label
+                  >
+                  <input
+                    id="medioPago"
+                    required
+                    disabled
+                    class="w-full bg-white border border-gray-400 text-[#4A4A4A] px-3 py-2 rounded text-base"
+                  ></input>
+                </div>
+                <div class="flex flex-col">
+                  <label
+                    class="text-sm text-gray-700 font-semibold mb-1"
+                    for="tipoEntrega"
+                    >Tipo de entrega</label
+                  >
+                  <input
+                    id="tipoEntrega"
+                    required
+                    disabled
+                    class="w-full bg-white border border-gray-400 text-[#4A4A4A] px-3 py-2 rounded text-base"
+                  ></input>
+                </div>
+                <div class="flex flex-col md:col-span-2">
+                  <label
+                    class="text-sm text-gray-700 font-semibold mb-1"
+                    for="comentario"
+                    >Comentario</label
+                  >
+                  <textarea
+                    id="comentario"
+                    disabled
+                    class="w-full bg-white border border-gray-400 text-[#4A4A4A] px-3 py-2 rounded text-base resize-none h-20"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white p-6 rounded shadow-xl">
+              <h2
+                class="text-xl font-semibold text-gray-900 border-b pb-2 mb-6"
+              >
+                Datos Cliente
+              </h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                <div class="flex flex-col">
+                  <label
+                    class="text-sm text-gray-700 font-semibold mb-1"
+                    for="clienteNombre"
+                    >Nombre</label
+                  >
+                  <input
+                    type="text"
+                    id="clienteNombre"
+                    required
+                    disabled
+                    class="w-full bg-white border border-gray-400 text-[#4A4A4A] px-3 py-2 rounded text-base"
+                  />
+                </div>
+                <div class="flex flex-col">
+                  <label
+                    class="text-sm text-gray-700 font-semibold mb-1"
+                    for="clienteDNI"
+                    >DNI</label
+                  >
+                  <input
+                    type="text"
+                    id="clienteDNI"
+                    disabled
+                    required
+                    class="w-full bg-white border border-gray-400 text-[#4A4A4A] px-3 py-2 rounded text-base"
+                  />
+                </div>
+                <div class="flex flex-col">
+                  <label
+                    class="text-sm text-gray-700 font-semibold mb-1"
+                    for="clienteDireccion"
+                    >Dirección</label
+                  >
+                  <input
+                    type="text"
+                    id="clienteDireccion"
+                    required
+                    disabled
+                    class="w-full bg-white border border-gray-400 text-[#4A4A4A] px-3 py-2 rounded text-base"
+                  />
+                </div>
+                <div class="flex flex-col">
+                  <label
+                    class="text-sm text-gray-700 font-semibold mb-1"
+                    for="clienteDistrito"
+                    >Distrito</label
+                  >
+                  <input
+                    type="text"
+                    id="clienteDistrito"
+                    required
+                    disabled
+                    class="w-full bg-white border border-gray-400 text-[#4A4A4A] px-3 py-2 rounded text-base"
+                  />
+                </div>
+                <div class="flex flex-col">
+                  <label
+                    class="text-sm text-gray-700 font-semibold mb-1"
+                    for="clienteProvincia"
+                    >Provincia</label
+                  >
+                  <input
+                    type="text"
+                    id="clienteProvincia"
+                    required
+                    disabled
+                    class="w-full bg-white border border-gray-400 text-[#4A4A4A] px-3 py-2 rounded text-base"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="text-xl font-bold text-gray-800 border-b pb-2 mb-6">
+          Detalles de Productos
+        </h2>
+        <div
+          class="overflow-x-auto bg-white border border-gray-300 shadow-xl rounded mb-10"
+        >
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead>
+              <tr>
+                <th
+                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-4 py-3 border-r border-white/30"
+                >
+                  Id
+                </th>
+                <th
+                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-4 py-3 border-r border-white/30"
+                >
+                  Producto
+                </th>
+                <th
+                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-4 py-3 border-r border-white/30"
+                >
+                  Cantidad
+                </th>
+                <th
+                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-4 py-3 border-r border-white/30"
+                >
+                  Precio Unitario
+                </th>
+                <th
+                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-4 py-3 border-r border-white/30"
+                >
+                  Precio Total
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              id="detalleVentaBody"
+              class="divide-y divide-gray-200"
+            ></tbody>
+            <tfoot>
+              <tr>
+                <td
+                  colspan="4"
+                  class="px-4 py-3 text-right text-base font-bold bg-gray-100"
+                >
+                  SUBTOTAL:
+                </td>
+                <td
+                  id="subtotalVenta"
+                  class="px-4 py-3 text-base font-bold bg-gray-100"
+                >
+                  $0.00
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="flex gap-10 justify-end">
+          <button
+            type="button"
+            id="btnActualizarVenta"
+            class="bg-[#4A4A4A] text-white px-4 py-2 rounded hover:bg-gray-700 transition duration-150 ease-in-out"
+          >
+            Actualizar Venta
+          </button>
+          <button
+            type="button"
+            id="btnEliminarVenta"
+            class="bg-red-600 text-white px-6 py-2 rounded shadow-lg hover:bg-red-700 transition duration-150 ease-in-out"
+          >
+            Eliminar Venta
+          </button>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="/app/utils.js"></script>
+    <script type="module" src="/app/detalleVenta.js"></script>
+  </body>
+</html>

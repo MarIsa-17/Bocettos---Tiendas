@@ -193,7 +193,7 @@ function renderDetalleVenta() {
                     <td class="px-4 py-3 border-r border-gray-200 text-sm">${producto.id_producto}</td>
                     <td class="px-4 py-3 border-r border-gray-200 text-sm">${producto.nombre}</td>
                     <td class="px-4 py-3 border-r border-gray-200 text-sm text-center">${producto.cantidad}</td>
-                    <td class="px-4 py-3 border-r border-gray-200 text-sm text-right">$${producto.precio_total.toFixed(2)}</td>
+                    <td class="px-4 py-3 border-r border-gray-200 text-sm text-right">S/. ${producto.precio_total.toFixed(2)}</td>
                     <td class="px-4 py-3 text-center">
                         <button type="button" 
                                 data-id="${producto.id_producto}" 

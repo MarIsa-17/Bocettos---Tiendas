@@ -9,6 +9,11 @@ export function cargarDatos(key) {
     return dataJSON ? JSON.parse(dataJSON) : [];
 }
 
+// eliminar un elemento del localStorage
+export function eliminarDatos(key) {
+    localStorage.removeItem(key);
+}
+
 
 // Guardar un arreglo en el localStorage
 export function guardarDatos(key, data) {

@@ -1,4 +1,4 @@
-import { cargarDatos } from "./utils.js";
+import { cargarDatos, guardarDatos } from "./utils.js";
 
 const OPCIONES_VENTA = {
     canalVenta: ['Web', 'Tienda Física', 'Instagram', 'Facebook', 'WhatsApp'],
@@ -184,7 +184,7 @@ function limpiarFiltros(){
 // Funciones de navegación y detalles
 function mostrarDetallesVenta(venta) {
     // Guardar la venta seleccionada en el localStorage
-    localStorage.setItem('venta_seleccionada', JSON.stringify(venta));
+    guardarDatos('ventaSeleccionada', venta);
     // Redirigir a la página de detalles de venta
     window.location.href = 'detalle-venta.html';
 }
