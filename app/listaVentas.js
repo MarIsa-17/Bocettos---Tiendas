@@ -108,10 +108,12 @@ function renderizarListaVentas(ventas){
             <td class="px-2 py-3 border-r border-gray-200">${venta.canal_venta}</td>
             <td class="px-2 py-3 border-r border-gray-200">${venta.estado}</td>
             <td class="px-2 py-3 border-r border-gray-200">${venta.fecha_venta}</td>
-            <td class="px-2 py-1 flex justify-center">
-                <button id="botonMostrarVenta" class="bg-gray-500 text-white text-xs px-2 py-1 rounded hover:bg-gray-600">
-                    Mostrar
-                </button>
+            <td class="px-2 py-1 text-center ">
+                <div class="flex justify-center">
+                    <button id="botonMostrarVenta" class="bg-[#4A4A4A] text-white font-normal px-2 rounded transition duration-200 ease-in-out border border-transparent hover:bg-white hover:text-[#4A4A4A] hover:border-[#4A4A4A]">
+                        Mostrar
+                    </button>
+                </div>
             </td>
         `;
         //agregarle evento al boton mostrar

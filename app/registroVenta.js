@@ -155,7 +155,7 @@ function eliminarProductoDetalle(id_producto) {
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
+        cancelButtonColor: '#808080',
         confirmButtonText: 'Sí, eliminar',
         cancelButtonText: 'Cancelar'
     }).then((result) => {
@@ -215,7 +215,7 @@ function renderDetalleVenta() {
         });
     }
 
-    document.getElementById('subtotalVenta').textContent = `$${subtotal.toFixed(2)}`;
+    document.getElementById('subtotalVenta').textContent = `S/.${subtotal.toFixed(2)}`;
     return subtotal;
 }
 

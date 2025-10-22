@@ -24,10 +24,10 @@
       >
         <img src="/assets/logo-black.svg" class="px-6 py-2 w-50" />
 
-        <h1 class="text-xl font-bold text-[#1d1d1b]">Lista de Ventas</h1>
+        <h1 class="text-xl font-semibold text-[#1d1d1b]">Lista de Ventas</h1>
 
         <button
-          class="bg-[#4A4A4A] text-white px-4 py-2 rounded hover:bg-gray-700 transition duration-150 ease-in-out"
+          class="bg-[#4A4A4A] text-white font-medium px-4 py-2 rounded transition duration-200 ease-in-out border border-transparent hover:bg-white hover:text-[#4A4A4A] hover:border-[#4A4A4A]"
         >
           Cerrar sesión
         </button>
@@ -38,7 +38,7 @@
           <div class="flex flex-col">
             <label
               for="fecha"
-              class="text-sm bg-[#EAEAEA] px-3 py-1 border border-gray-300 rounded-t"
+              class="text-white bg-[#808080] px-3 py-1 border border-gray-300 rounded-t"
               >Fecha</label
             >
             <input
@@ -51,8 +51,8 @@
           <div class="flex flex-col">
             <label
               for="tipo_entrega"
-              class="text-sm bg-[#EAEAEA] px-3 py-1 border border-gray-300 rounded-t"
-              >Select de Tipo de entrega</label
+              class="text-white bg-[#808080] px-3 py-1 border border-gray-300 rounded-t"
+              >Tipo de entrega</label
             >
             <select
               id="tipoEntrega"
@@ -65,8 +65,8 @@
           <div class="flex flex-col">
             <label
               for="canal_venta"
-              class="text-sm bg-[#EAEAEA] px-3 py-1 border border-gray-300 rounded-t"
-              >Canal de venta (select)</label
+              class="text-white bg-[#808080] px-3 py-1 border border-gray-300 rounded-t"
+              >Canal de venta</label
             >
             <select
               id="canalVenta"
@@ -79,8 +79,8 @@
           <div class="flex flex-col">
             <label
               for="estado_venta"
-              class="text-sm bg-[#EAEAEA] px-3 py-1 border border-gray-300 rounded-t"
-              >Estado de venta (select)</label
+              class="text-white bg-[#808080] px-3 py-1 border border-gray-300 rounded-t"
+              >Estado de venta</label
             >
             <select
               id="estadoVenta"
@@ -90,8 +90,9 @@
             </select>
           </div>
 
-          <div class="flex flex-col">
-            <button id="botonLimpiarFiltros" type="button" class="bg-[#4A4A4A] text-white px-4 py-2 rounded hover:bg-gray-700 transition duration-150 ease-in-out">
+          <div class="flex flex-col justify-center">
+            <button id="botonLimpiarFiltros" type="button"
+             class="bg-[#4A4A4A] text-white font-medium px-4 py-2 rounded transition duration-200 ease-in-out border border-transparent hover:bg-white hover:text-[#4A4A4A] hover:border-[#4A4A4A]">
                 Limpiar filtros
             </button>
           </div>
@@ -106,47 +107,47 @@
             <thead>
               <tr>
                 <th
-                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
+                  class="bg-[#808080] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
                 >
                   Código de Venta
                 </th>
                 <th
-                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
+                  class="bg-[#808080] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
                 >
                   DNI Cliente
                 </th>
                 <th
-                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
+                  class="bg-[#808080] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
                 >
                   Subtotal
                 </th>
                 <th
-                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
+                  class="bg-[#808080] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
                 >
                   Medio de Pago
                 </th>
                 <th
-                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
+                  class="bg-[#808080] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
                 >
                   Tipo de entrega
                 </th>
                 <th
-                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
+                  class="bg-[#808080] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
                 >
                   Canal de venta
                 </th>
                 <th
-                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
+                  class="bg-[#808080] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
                 >
                   Estado de venta
                 </th>
                 <th
-                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
+                  class="bg-[#808080] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3 border-r border-white/30"
                 >
                   Fecha de venta
                 </th>
                 <th
-                  class="bg-[#4A4A4A] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3"
+                  class="bg-[#808080] text-white text-xs font-semibold uppercase tracking-wider px-2 py-3"
                 >
                   Acciones
                 </th>
