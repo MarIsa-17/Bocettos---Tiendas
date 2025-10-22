@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //añadir eventos al boton Actualizar
     document.getElementById("btnActualizarVenta").addEventListener("click", () => {
-      actualizarVenta(venta.id_venta);
+      actualizarVenta(venta);
     });
 
   //añadir evento al botón eliminar
