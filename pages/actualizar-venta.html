@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
     <style>
-        .login-bg {
-            background-image: url('/assets/fondo.jpg'); 
-            background-size: cover;
-            background-position: center;
-        }
+      .login-bg {
+        background-image: url("/assets/fondo.jpg");
+        background-size: cover;
+        background-position: center;
+      }
     </style>
     <title>Actualizar Venta</title>
 </head>
@@ -334,6 +335,7 @@
         </main>
       </form>
     </div>
-
-</body>
+    <script type="module" src="/app/utils.js"></script>
+    <script type="module" src="/app/actualizarVenta.js"></script>
+  </body>
 </html>

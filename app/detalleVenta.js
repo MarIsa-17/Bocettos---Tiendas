@@ -13,6 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
   renderDetalleVenta();
 
   //añadir eventos al boton Actualizar
+    document.getElementById("btnActualizarVenta").addEventListener("click", () => {
+      actualizarVenta(venta.id_venta);
+    });
 
   //añadir evento al botón eliminar
   document.getElementById("btnEliminarVenta").addEventListener("click", () => {
@@ -143,4 +146,9 @@ function eliminarVenta(idVenta) {
       }, 2000);
     }
   });
+}
+
+function actualizarVenta(venta) {
+  guardarDatos("ventaSeleccionada", venta);
+  window.location.href = "actualizar-venta.html";
 }
