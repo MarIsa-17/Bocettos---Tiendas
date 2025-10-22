@@ -26,3 +26,21 @@ export function generarIdVenta(ventas) {
     // Formatea el número a 4 dígitos con ceros iniciales
     return 'V-' + count.toString().padStart(4, '0');
 }
+
+
+// personalizar alertas
+ export function mostrarAlerta(icono, titulo, mensaje) {
+  Swal.fire({
+    icon: icono,
+    title: titulo,
+    text: mensaje,
+    confirmButtonText: 'OK',
+    confirmButtonColor: '#4A4A4A',
+    customClass: {
+      confirmButton:
+        'text-white font-semibold rounded hover:bg-white hover:text-[#4A4A4A] transition duration-200'
+    },
+    background: '#ffffff', 
+    color: '#4A4A4A', 
+  })
+}

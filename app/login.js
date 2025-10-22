@@ -1,4 +1,4 @@
-import { cargarUsuarios } from "./utils.js"
+import { cargarUsuarios, mostrarAlerta } from "./utils.js"
 
 const formulario = document.getElementById('formularioLogin')
 console.log(formulario)
@@ -20,12 +20,12 @@ function manejarLogin(event) {
     );
     console.log(usuarioEncontrado)
     if (usuarioEncontrado) {
-        Swal.fire('Bienvenido', `Hola, ${usuarioEncontrado.usuario}!`, 'success');
+        mostrarAlerta('success', 'Bienvenido', `Hola, ${usuarioEncontrado.usuario}!`)
         setTimeout(() => {
             window.location.href= "/pages/lista-ventas.html"
             },3000);
 
     } else {
-        Swal.fire('Error', 'Usuario o contraseña incorrectos.', 'error');
+        mostrarAlerta('error', 'Error', 'Usuario o contraseña incorrectos.')
     }
 }

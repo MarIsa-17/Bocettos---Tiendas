@@ -1,4 +1,4 @@
-import { cargarDatos, eliminarDatos, guardarDatos } from "./utils.js";
+import { cargarDatos, eliminarDatos, guardarDatos , mostrarAlerta} from "./utils.js";
 
 let venta = cargarDatos("ventaSeleccionada");
 
@@ -35,14 +35,14 @@ function cargarInventarioCSV() {
         skipEmptyLines: true,
         complete: function(results) {
             if (results.data.length === 0 || results.errors.length > 0) {
-                Swal.fire('Error de Carga', 'No se pudo cargar el inventario de productos desde el CSV.', 'error');
+                mostrarAlerta('error', 'Error de Carga', 'No se pudo cargar el inventario de productos desde el CSV.');
                 return;
             }
             inventarioProductos = results.data;
             poblarSelectProductos();
         },
         error: function(error) {
-            Swal.fire('Error de Carga', `Error al acceder al CSV: ${error.message}. Asegúrate de usar Live Server.`, 'error');
+            mostrarAlerta('error', 'Error de Carga', `Error al acceder al CSV: ${error.message}. Asegúrate de usar Live Server.`);
         }
     });
 }
@@ -153,6 +153,6 @@ function renderDetalleVenta() {
         });
     }
 
-    document.getElementById('subtotalVenta').textContent = `$${subtotal.toFixed(2)}`;
+    document.getElementById('subtotalVenta').textContent = `S/.${subtotal.toFixed(2)}`;
     return subtotal;
 }

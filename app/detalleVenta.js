@@ -1,4 +1,4 @@
-import { cargarDatos, eliminarDatos, guardarDatos } from "./utils.js";
+import { cargarDatos, eliminarDatos, guardarDatos, mostrarAlerta } from "./utils.js";
 
 const venta = cargarDatos("ventaSeleccionada");
 
@@ -124,11 +124,11 @@ function eliminarVenta(idVenta) {
   // nos muestra un sweet alert para confirmar la eliminacion
   Swal.fire({
     title: "¿Estás seguro?",
-    text: "Esta acción la venta actual por completo",
+    text: "Esta acción eliminará la venta actual por completo",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#d33",
-    cancelButtonColor: "#808080",
+    cancelButtonColor: "#4A4A4A",
     confirmButtonText: "Sí, eliminar",
     cancelButtonText: "Cancelar",
   }).then((result) => {
@@ -138,7 +138,7 @@ function eliminarVenta(idVenta) {
       ventas = ventas.filter((venta) => venta.id_venta !== idVenta);
         guardarDatos("app_sales", ventas);
         eliminarDatos("ventaSeleccionada");
-      Swal.fire("Eliminado!", "La venta ha sido eliminada.", "success");
+      mostrarAlerta( "success", "Eliminado!", "La venta ha sido eliminada.");
 
       setTimeout(() => {
         //redirigir a la lista de ventas

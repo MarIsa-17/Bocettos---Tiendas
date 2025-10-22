@@ -1,4 +1,4 @@
-import { cargarUsuarios } from "./utils"
+import { cargarUsuarios, mostrarAlerta } from "./utils"
 
 const formulario = document.getElementById('formulario-registro')
 formulario.addEventListener('submit', manejarRegistro)
@@ -14,7 +14,7 @@ function manejarRegistro (event){
     const confirmPassword = document.getElementById('confirmPassword').value
 
     if (password !== confirmPassword) {
-        Swal.fire('Error', 'Las contraseñas no coinciden.', 'error')
+        mostrarAlerta('error','Error', 'Las contraseñas no coinciden.')
         return;
     }
     const nuevoUsuario = {
@@ -28,16 +28,13 @@ function manejarRegistro (event){
     const usuarioExistente = usuarios.find(user => user.usuario === nuevoUsuario.usuario)
 
     if(usuarioExistente){
-        Swal.fire('Error', `🚫 El usuario "${nuevoUsuario.usuario}" ya existe.`,'error')
+        mostrarAlerta('error','Error', `🚫 El usuario "${nuevoUsuario.usuario}" ya existe.`)
     } else {
         usuarios.push(nuevoUsuario)
         guardarUsuarios(usuarios)
 
-        Swal.fire({
-                title: '¡Registro Exitoso!',
-                html: 'El usuario fue registrado y guardado localmente en tu navegador (LocalStorage).',
-                icon: 'success'
-        })
+        mostrarAlerta('success', '¡Registro Exitoso!', 'El usuario fue guardado correctamente(LocalStorage).')
+
         setTimeout(() => {
         window.location.href= "/index.html"
         },3000);

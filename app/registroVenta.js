@@ -1,4 +1,4 @@
-import { cargarDatos, guardarDatos, generarIdVenta } from "./utils.js";
+import { cargarDatos, guardarDatos, generarIdVenta, mostrarAlerta } from "./utils.js";
 
 // Datos de los selects de venta
 const OPCIONES_VENTA = {
@@ -61,14 +61,14 @@ function cargarInventarioCSV() {
         skipEmptyLines: true,
         complete: function(results) {
             if (results.data.length === 0 || results.errors.length > 0) {
-                Swal.fire('Error de Carga', 'No se pudo cargar el inventario de productos desde el CSV.', 'error');
+                mostrarAlerta('error','Error de Carga', 'No se pudo cargar el inventario de productos desde el CSV.')
                 return;
             }
             inventarioProductos = results.data;
             poblarSelectProductos();
         },
         error: function(error) {
-            Swal.fire('Error de Carga', `Error al acceder al CSV: ${error.message}. Asegúrate de usar Live Server.`, 'error');
+            mostrarAlerta('error','Error de Carga', `Error al acceder al CSV: ${error.message}. Asegúrate de usar Live Server.`)
         }
     });
 }
@@ -113,7 +113,7 @@ function agregarProducto() {
 
     // Validación
     if (!id || isNaN(cantidad) || cantidad <= 0 || isNaN(precioUnitario) || precioUnitario < 0) {
-        Swal.fire('Advertencia', 'Por favor, selecciona un producto y completa la cantidad.', 'warning');
+        mostrarAlerta('warning', 'Advertencia', 'Por favor, selecciona un producto y completa la cantidad.');
         return;
     }
 
@@ -123,7 +123,7 @@ function agregarProducto() {
     if (productoExistente) {
         productoExistente.cantidad += cantidad;
         productoExistente.precio_total += precioTotal;
-        Swal.fire('Actualizado', `Cantidad de ${nombre} actualizada.`, 'info');
+        mostrarAlerta('info', 'Actualizado', `Cantidad de ${nombre} actualizada.`);
     } else {
         productosVentaActual.push({
             id_producto: id,
@@ -132,7 +132,7 @@ function agregarProducto() {
             precio_unitario: precioUnitario,
             precio_total: precioTotal
         });
-        Swal.fire('Añadido', `${nombre} agregado a la venta.`, 'success');
+        mostrarAlerta('success', 'Añadido', `${nombre} agregado a la venta.`);
     }
 
     // Limpia el formulario de producto
@@ -155,7 +155,7 @@ function eliminarProductoDetalle(id_producto) {
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',
-        cancelButtonColor: '#808080',
+        cancelButtonColor: '#4A4A4A',
         confirmButtonText: 'Sí, eliminar',
         cancelButtonText: 'Cancelar'
     }).then((result) => {
@@ -166,11 +166,7 @@ function eliminarProductoDetalle(id_producto) {
             // Renderiza la tabla de nuevo
             renderDetalleVenta();
             
-            Swal.fire(
-                'Eliminado!',
-                'El producto ha sido quitado del detalle de venta.',
-                'success'
-            );
+            mostrarAlerta('success', 'Eliminado!','El producto ha sido quitado del detalle de venta.');
         }
     });
 }
@@ -227,7 +223,7 @@ function handleRegistrarVenta(event) {
     event.preventDefault(); 
 
     if (productosVentaActual.length === 0) {
-        Swal.fire('Error', 'Debes agregar al menos un producto para registrar la venta.', 'error');
+        mostrarAlerta('error', 'Error', 'Debes agregar al menos un producto para registrar la venta.');
         return;
     }
 
@@ -255,7 +251,7 @@ function handleRegistrarVenta(event) {
     
     // Si algún select de venta no fue seleccionado (aunque tienen 'required'):
     if (Object.values(ventaData).some(val => val === "")) {
-        Swal.fire('Advertencia', 'Por favor, completa todos los campos de Datos de Venta y Cliente.', 'warning');
+        mostrarAlerta('warning', 'Advertencia', 'Por favor, completa todos los campos de Datos de Venta y Cliente.');
         return;
     }
 
@@ -281,7 +277,15 @@ function handleRegistrarVenta(event) {
     Swal.fire({
         title: '¡Venta Registrada!',
         html: `La venta <strong>${nuevaVenta.id_venta}</strong> ha sido guardada exitosamente en LocalStorage.`,
-        icon: 'success'
-    });
+        icon: 'success',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#4A4A4A',
+        customClass: {
+            confirmButton:
+            'text-white font-semibold rounded hover:bg-white hover:text-[#4A4A4A] transition duration-200'
+        },
+        background: '#ffffff',
+        color: '#4A4A4A',
+    })
 }
 
