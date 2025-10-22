@@ -1,4 +1,4 @@
-import { cargarDatos, guardarDatos, generarIdVenta, mostrarAlerta } from "./utils.js";
+import { cargarDatos, guardarDatos, generarIdVenta, mostrarAlerta, navegarA } from "./utils.js";
 
 // Datos de los selects de venta
 const OPCIONES_VENTA = {
@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btnAgregarProducto').addEventListener('click', agregarProducto);
     document.getElementById('productoSelect').addEventListener('change', poblarDatosProducto);
     document.getElementById('ventaForm').addEventListener('submit', handleRegistrarVenta);
+    document.getElementById('btnRegresar').addEventListener('click', () => navegarA('lista-ventas.html'))
 
     renderDetalleVenta();
 });

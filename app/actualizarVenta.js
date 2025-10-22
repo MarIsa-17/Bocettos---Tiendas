@@ -3,6 +3,7 @@ import {
   eliminarDatos,
   guardarDatos,
   mostrarAlerta,
+  navegarA
 } from "./utils.js";
 
 const SALES_KEY = "app_sales";
@@ -47,6 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("ventaForm")
     .addEventListener("submit", actualizarVenta);
+
+    document.getElementById('btnRegresar').addEventListener('click', () => navegarA('detalle-venta.html'))
 });
 
 function cargarInventarioCSV() {

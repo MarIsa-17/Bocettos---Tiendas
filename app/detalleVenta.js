@@ -1,4 +1,4 @@
-import { cargarDatos, eliminarDatos, guardarDatos, mostrarAlerta } from "./utils.js";
+import { cargarDatos, eliminarDatos, guardarDatos, mostrarAlerta, navegarA } from "./utils.js";
 
 const venta = cargarDatos("ventaSeleccionada");
 
@@ -21,6 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("btnEliminarVenta").addEventListener("click", () => {
     eliminarVenta(venta.id_venta);
   });
+
+  document.getElementById('btnRegresar').addEventListener('click', () => navegarA('lista-ventas.html'))
 });
 
 // {

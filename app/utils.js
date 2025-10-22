@@ -44,3 +44,8 @@ export function generarIdVenta(ventas) {
     color: '#4A4A4A', 
   })
 }
+
+//funcion de navegacion
+export function navegarA(ruta){
+    window.location.href = ruta
+}
