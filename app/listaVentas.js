@@ -1,4 +1,8 @@
-import { cargarDatos, guardarDatos } from "./utils.js";
+import { cargarDatos, guardarDatos, navegarA } from "./utils.js";
+
+if(cargarDatos('userLogged').length === 0){
+  navegarA('../index.html')
+}
 
 const OPCIONES_VENTA = {
     canalVenta: ['Web', 'Tienda Física', 'Instagram', 'Facebook', 'WhatsApp'],

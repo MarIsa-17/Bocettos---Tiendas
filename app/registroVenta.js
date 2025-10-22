@@ -1,5 +1,9 @@
 import { cargarDatos, guardarDatos, generarIdVenta, mostrarAlerta, navegarA } from "./utils.js";
 
+if(cargarDatos('userLogged').length === 0){
+  navegarA('../index.html')
+}
+
 // Datos de los selects de venta
 const OPCIONES_VENTA = {
     canalVenta: ['Web', 'Tienda Física', 'Instagram', 'Facebook', 'WhatsApp'],

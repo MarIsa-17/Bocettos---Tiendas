@@ -1,10 +1,14 @@
 import {
   cargarDatos,
-  eliminarDatos,
   guardarDatos,
   mostrarAlerta,
   navegarA
 } from "./utils.js";
+
+//comprobamos si estamos loggeados
+if(cargarDatos('userLogged').length === 0){
+  navegarA('../index.html')
+}
 
 const SALES_KEY = "app_sales";
 

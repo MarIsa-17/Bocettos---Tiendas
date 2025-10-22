@@ -1,4 +1,4 @@
-import { cargarUsuarios, mostrarAlerta } from "./utils.js"
+import { cargarUsuarios, guardarDatos, mostrarAlerta } from "./utils.js"
 
 const formulario = document.getElementById('formularioLogin')
 console.log(formulario)
@@ -20,6 +20,10 @@ function manejarLogin(event) {
     );
     console.log(usuarioEncontrado)
     if (usuarioEncontrado) {
+        //guardar el usuario loggeado en el localstorage
+        const userLogged = { loginUsuario, loginPassword }
+        guardarDatos('loggedUser', userLogged)
+
         mostrarAlerta('success', 'Bienvenido', `Hola, ${usuarioEncontrado.usuario}!`)
         setTimeout(() => {
             window.location.href= "/pages/lista-ventas.html"

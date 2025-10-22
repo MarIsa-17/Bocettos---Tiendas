@@ -1,5 +1,9 @@
 import { cargarDatos, eliminarDatos, guardarDatos, mostrarAlerta, navegarA } from "./utils.js";
 
+if(cargarDatos('userLogged').length === 0){
+  navegarA('../index.html')
+}
+
 const venta = cargarDatos("ventaSeleccionada");
 
 document.addEventListener("DOMContentLoaded", () => {

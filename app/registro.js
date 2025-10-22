@@ -1,4 +1,4 @@
-import { cargarUsuarios, mostrarAlerta } from "./utils"
+import { cargarUsuarios, mostrarAlerta } from "./utils.js"
 
 const formulario = document.getElementById('formulario-registro')
 formulario.addEventListener('submit', manejarRegistro)
