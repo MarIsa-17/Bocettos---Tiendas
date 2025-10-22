@@ -1,6 +1,7 @@
 import {
   cargarDatos,
   guardarDatos,
+  logout,
   mostrarAlerta,
   navegarA
 } from "./utils.js";
@@ -54,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("submit", actualizarVenta);
 
     document.getElementById('btnRegresar').addEventListener('click', () => navegarA('detalle-venta.html'))
+    document.getElementById('btnLogout').addEventListener('click', () => logout())
 });
 
 function cargarInventarioCSV() {

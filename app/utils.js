@@ -49,3 +49,8 @@ export function generarIdVenta(ventas) {
 export function navegarA(ruta){
     window.location.href = ruta
 }
+
+export function logout(){
+    eliminarDatos('userLogged');
+    window.location.href = "../index.html"
+}

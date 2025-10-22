@@ -1,4 +1,4 @@
-import { cargarDatos, eliminarDatos, guardarDatos, mostrarAlerta, navegarA } from "./utils.js";
+import { cargarDatos, eliminarDatos, guardarDatos, mostrarAlerta, navegarA, logout } from "./utils.js";
 
 if(cargarDatos('userLogged').length === 0){
   navegarA('../index.html')
@@ -27,6 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById('btnRegresar').addEventListener('click', () => navegarA('lista-ventas.html'))
+
+  document.getElementById('btnLogout').addEventListener('click', () => logout())
 });
 
 // {

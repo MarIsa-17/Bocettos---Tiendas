@@ -1,4 +1,4 @@
-import { cargarDatos, guardarDatos, navegarA } from "./utils.js";
+import { cargarDatos, guardarDatos, navegarA , logout} from "./utils.js";
 
 if(cargarDatos('userLogged').length === 0){
   navegarA('../index.html')
@@ -40,6 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Evento al hacer clic en "Agregar Venta"
     document.getElementById('botonAgregarVenta').addEventListener('click', mostrarAgregarVenta);
+
+    document.getElementById('btnLogout').addEventListener('click', () => logout())
 
 });
 

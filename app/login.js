@@ -22,7 +22,7 @@ function manejarLogin(event) {
     if (usuarioEncontrado) {
         //guardar el usuario loggeado en el localstorage
         const userLogged = { loginUsuario, loginPassword }
-        guardarDatos('loggedUser', userLogged)
+        guardarDatos('userLogged', userLogged)
 
         mostrarAlerta('success', 'Bienvenido', `Hola, ${usuarioEncontrado.usuario}!`)
         setTimeout(() => {
