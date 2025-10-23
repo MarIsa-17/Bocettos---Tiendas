@@ -1,4 +1,4 @@
-import { cargarDatos, guardarDatos, generarIdVenta, mostrarAlerta, navegarA, logout } from "./utils.js";
+import { cargarDatos, guardarDatos, renderDetalleVenta, generarIdVenta, mostrarAlerta, navegarA, logout } from "./utils.js";
 
 if(cargarDatos('userLogged').length === 0){
   navegarA('../index.html')
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btnRegresar').addEventListener('click', () => navegarA('lista-ventas.html'))
     document.getElementById('btnLogout').addEventListener('click', () => logout())
 
-    renderDetalleVenta();
+    renderDetalleVenta(productosVentaActual, true, eliminarProductoDetalle);
 
 });
 
@@ -150,7 +150,7 @@ function agregarProducto() {
     document.getElementById('productoCantidad').removeAttribute('max');
 
     // Renderizamos el array actualizado
-    renderDetalleVenta();
+    renderDetalleVenta(productosVentaActual, true, eliminarProductoDetalle);
 }
 
 // Lógica para eliminar un producto del detalle de venta
@@ -171,55 +171,11 @@ function eliminarProductoDetalle(id_producto) {
             productosVentaActual = productosVentaActual.filter(p => p.id_producto !== id_producto);
             
             // Renderiza la tabla de nuevo
-            renderDetalleVenta();
+            renderDetalleVenta(productosVentaActual, true, eliminarProductoDetalle); 
             
             mostrarAlerta('success', 'Eliminado!','El producto ha sido quitado del detalle de venta.');
         }
     });
-}
-
-function renderDetalleVenta() {
-    const tbody = document.getElementById('detalleVentaBody');
-    tbody.innerHTML = ''; 
-    let subtotal = 0;
-
-    if (productosVentaActual.length === 0) {
-        // La fila de vacío ahora debe usar colspan="5"
-        const emptyRow = `<tr><td colspan="5" class="px-4 py-3 text-center text-gray-500">Aún no hay productos en la venta.</td></tr>`;
-        tbody.innerHTML = emptyRow;
-    } else {
-        productosVentaActual.forEach(producto => {
-            subtotal += producto.precio_total;
-            // Template de la fila incluyendo la nueva columna y el botón
-            const row = `
-                <tr id="row-${producto.id_producto}">
-                    <td class="px-4 py-3 border-r border-gray-200 text-sm">${producto.id_producto}</td>
-                    <td class="px-4 py-3 border-r border-gray-200 text-sm">${producto.nombre}</td>
-                    <td class="px-4 py-3 border-r border-gray-200 text-sm text-center">${producto.cantidad}</td>
-                    <td class="px-4 py-3 border-r border-gray-200 text-sm text-right">S/. ${producto.precio_total.toFixed(2)}</td>
-                    <td class="px-4 py-3 text-center">
-                        <button type="button" 
-                                data-id="${producto.id_producto}" 
-                                class="btn-eliminar-producto text-red-500 hover:text-red-700 font-bold p-1 rounded transition duration-150">
-                            🗑️
-                        </button>
-                    </td>
-                </tr>
-            `;
-            tbody.insertAdjacentHTML('beforeend', row);
-        });
-        
-        // Asignar eventos a los botones después de que las filas son insertadas en el DOM
-        document.querySelectorAll('.btn-eliminar-producto').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const id_a_eliminar = e.currentTarget.getAttribute('data-id');
-                eliminarProductoDetalle(id_a_eliminar);
-            });
-        });
-    }
-
-    document.getElementById('subtotalVenta').textContent = `S/.${subtotal.toFixed(2)}`;
-    return subtotal;
 }
 
 // ===================================================================
@@ -235,7 +191,7 @@ function handleRegistrarVenta(event) {
     }
 
     // 1. Recolección de datos (AHORA LEYENDO DE SELECTS)
-    const subtotal = renderDetalleVenta(); 
+    const subtotal = productosVentaActual.reduce((acc, p) => acc + p.precio_total, 0)
 
     const cliente = {
         nombre: document.getElementById('clienteNombre').value.trim(),

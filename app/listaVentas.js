@@ -6,8 +6,6 @@ if(cargarDatos('userLogged').length === 0){
 
 const OPCIONES_VENTA = {
     canalVenta: ['Web', 'Tienda Física', 'Instagram', 'Facebook', 'WhatsApp'],
-    // tipoVenta: ['Venta Directa', 'Cotización', 'Venta a Crédito'],
-    // medioPago: ['Efectivo', 'Tarjeta de Crédito', 'Transferencia', 'Yape/Plin'],
     tipoEntrega: ['Recojo en Tienda', 'Envío local', 'Envío nacional'],
     estadoVenta: ['Registrada', 'Completada', 'Cancelada']
 };
