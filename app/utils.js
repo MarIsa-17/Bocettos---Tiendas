@@ -119,14 +119,14 @@ export function renderDetalleVenta(productos, mostrarAcciones = false, eliminarH
                         🗑️
                     </button>
                   </td>`
-                : `<td class="px-4 py-3 border-r border-gray-200 text-sm text-right">S/. ${precioUnitarioFormatted}</td>`;
+                : `<td class="px-4 py-3 border-r border-gray-200 text-sm text-right">S/. ${precioTotalFormatted}</td>`;
             
             const row = `
                 <tr id="${rowId}" class="${rowClickHandler ? 'cursor-pointer hover:bg-gray-100 transition duration-150' : ''}">
                     <td class="px-4 py-3 border-r border-gray-200 text-sm">${producto.id_producto}</td>
                     <td class="px-4 py-3 border-r border-gray-200 text-sm">${producto.nombre}</td>
                     <td class="px-4 py-3 border-r border-gray-200 text-sm text-center">${producto.cantidad}</td>
-                    <td class="px-4 py-3 border-r border-gray-200 text-sm text-right">S/. ${precioTotalFormatted}</td>
+                    <td class="px-4 py-3 border-r border-gray-200 text-sm text-right">S/. ${precioUnitarioFormatted}</td>
                     ${accionesCol}
                 </tr>
             `;

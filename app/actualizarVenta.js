@@ -262,6 +262,7 @@ function actualizarProducto() {
   } else {
     // Añadir nuevo producto
     productosVentaActual.push(nuevoProducto);
+
     mostrarAlerta("success", "Añadido", `${nombreProducto} agregado a la venta.`);
   }
 
@@ -342,13 +343,14 @@ function actualizarVenta(event) {
 
     // 7. Guardar el array completo de app_sales en localStorage
     guardarDatos(SALES_KEY, ventasExistentes);
+    guardarDatos('ventaSeleccionada',ventaActualizada)
     // Eliminar la clave temporal de trabajo
     eliminarDatos("ventaPorActualizar"); 
 
     mostrarAlerta(
       "success",
-      "¡Venta Actualizada!",
-      `La venta ${ventaActualizada.id_venta} ha sido modificada exitosamente.`
+      "¡Venta Actualizada!",`
+      La venta ${ventaActualizada.id_venta} ha sido modificada exitosamente.`
     );
     
     setTimeout(() => {
