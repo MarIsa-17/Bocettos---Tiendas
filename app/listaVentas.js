@@ -108,7 +108,7 @@ function renderizarListaVentas(ventas){
         row.innerHTML = `
             <td class="px-2 py-3 border-r border-gray-200">${venta.id_venta}</td>
             <td class="px-2 py-3 border-r border-gray-200">${venta.cliente.dni}</td>
-            <td class="px-2 py-3 border-r border-gray-200">S/.${venta.subtotal}</td>
+            <td class="px-2 py-3 border-r border-gray-200">S/.${venta.subtotal.toFixed(2)}</td>
             <td class="px-2 py-3 border-r border-gray-200">${venta.medio_pago}</td>
             <td class="px-2 py-3 border-r border-gray-200">${venta.tipo_entrega}</td>
             <td class="px-2 py-3 border-r border-gray-200">${venta.canal_venta}</td>

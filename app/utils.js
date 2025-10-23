@@ -22,9 +22,9 @@ export function guardarDatos(key, data) {
 
 // Generar un ID único para una nueva venta
 export function generarIdVenta(ventas) {
-    const count = ventas.length + 1;
+    const myUUID = crypto.randomUUID(); //valor aleatorio
     // Formatea el número a 4 dígitos con ceros iniciales
-    return 'V-' + count.toString().padStart(4, '0');
+    return 'V-' + myUUID;
 }
 
 
@@ -97,7 +97,7 @@ export function renderDetalleVenta(productos, mostrarAcciones = false, eliminarH
 
     tbody.innerHTML = "";
     let subtotal = 0;
-    const colspan = mostrarAcciones ? 5 : 4;
+    const colspan = mostrarAcciones ? 6 : 5;
 
     if (!productos || productos.length === 0) {
         const emptyRow = `<tr><td colspan="${colspan}" class="px-4 py-3 text-center text-gray-500">Aún no hay productos en la venta.</td></tr>`;
@@ -119,7 +119,7 @@ export function renderDetalleVenta(productos, mostrarAcciones = false, eliminarH
                         🗑️
                     </button>
                   </td>`
-                : `<td class="px-4 py-3 border-r border-gray-200 text-sm text-right">S/. ${precioTotalFormatted}</td>`;
+                  : '';
             
             const row = `
                 <tr id="${rowId}" class="${rowClickHandler ? 'cursor-pointer hover:bg-gray-100 transition duration-150' : ''}">
@@ -127,6 +127,7 @@ export function renderDetalleVenta(productos, mostrarAcciones = false, eliminarH
                     <td class="px-4 py-3 border-r border-gray-200 text-sm">${producto.nombre}</td>
                     <td class="px-4 py-3 border-r border-gray-200 text-sm text-center">${producto.cantidad}</td>
                     <td class="px-4 py-3 border-r border-gray-200 text-sm text-right">S/. ${precioUnitarioFormatted}</td>
+                    <td class="px-4 py-3 border-r border-gray-200 text-sm text-right">S/. ${precioTotalFormatted}</td>
                     ${accionesCol}
                 </tr>
             `;
@@ -173,6 +174,8 @@ export function renderDetalleVenta(productos, mostrarAcciones = false, eliminarH
 export function jsonToCsv(data) {
     if (!data || data.length === 0) return '';
 
+    const DELIMITER = ';';
+
     // 1. Obtener y normalizar las cabeceras
     const headerSet = new Set();
     const normalizedData = [];
@@ -213,23 +216,26 @@ export function jsonToCsv(data) {
 
     // 2. Construir la cadena CSV
     // Cabecera:
-    let csv = headers.join(',') + '\n';
+    let csv = headers.join(DELIMITER) + '\n';
 
     // Filas:
     normalizedData.forEach(row => {
         const values = headers.map(header => {
             const value = row[header];
-            // Asegurar que comas y saltos de línea dentro del valor sean escapados con comillas dobles
+            // Asegurar que comas, punto y comas y saltos de línea dentro del valor sean escapados con comillas dobles
             const stringValue = (value === undefined || value === null) ? '' : String(value);
-            const needsQuotes = stringValue.includes(',') || stringValue.includes('"') || stringValue.includes('\n');
+            // 🚨 Modificado: Ahora también verificamos el DELIMITER (;)
+            const needsQuotes = stringValue.includes(DELIMITER) || stringValue.includes('"') || stringValue.includes('\n');
             
             if (needsQuotes) {
-                 // Escapar comillas dobles con otra comilla doble, y luego envolver en comillas
+                // Escapar comillas dobles con otra comilla doble, y luego envolver en comillas
                 return `"${stringValue.replace(/"/g, '""')}"`;
             }
             return stringValue;
         });
-        csv += values.join(',') + '\n';
+        
+        // 2️⃣ USAR DELIMITER (;) al unir los valores de la fila
+        csv += values.join(DELIMITER) + '\n';
     });
 
     return csv;

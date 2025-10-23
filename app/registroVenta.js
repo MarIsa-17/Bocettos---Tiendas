@@ -90,7 +90,7 @@ function poblarSelectProductos() {
         const optionElement = document.createElement('option');
         // Usamos el id_producto como valor para buscarlo fácilmente luego
         optionElement.value = producto.id_producto; 
-        optionElement.textContent = `${producto.nombre} ($${parseFloat(producto.precio).toFixed(2)})`;
+        optionElement.textContent = `${producto.nombre}`;
         select.appendChild(optionElement);
     });
 }

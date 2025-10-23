@@ -13,8 +13,11 @@ import {
 
 //comprobamos si estamos loggeados
 if(cargarDatos('userLogged').length === 0){
-  navegarA('../index.html')
+  navegarA("../index.html");
+} else if (cargarDatos('ventaSeleccionada').length === 0){
+  navegarA("./lista-ventas.html")
 }
+
 
 const SALES_KEY = "app_sales";
 
@@ -137,7 +140,7 @@ function poblarSelectProductos(productos) {
   productos.forEach((producto) => {
     const option = document.createElement("option");
     option.value = producto.id_producto;
-    option.textContent = `${producto.nombre} (Stock: ${producto.stock})`;
+    option.textContent = `${producto.nombre}`;
     selectProductos.appendChild(option);
   });
   

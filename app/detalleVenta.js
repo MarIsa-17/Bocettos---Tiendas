@@ -10,9 +10,12 @@ import {
   renderDetalleVenta
 } from "./utils.js";
 
-if (cargarDatos("userLogged").length === 0) {
+if(cargarDatos('userLogged').length === 0){
   navegarA("../index.html");
+} else if (cargarDatos('ventaSeleccionada').length === 0){
+  navegarA("./lista-ventas.html")
 }
+
 
 const venta = cargarDatos("ventaSeleccionada");
 
