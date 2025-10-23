@@ -27,7 +27,7 @@ function manejarLogin(event) {
         mostrarAlerta('success', 'Bienvenido', `Hola, ${usuarioEncontrado.usuario}!`)
         setTimeout(() => {
             window.location.href= "/pages/lista-ventas.html"
-            },3000);
+            },500);
 
     } else {
         mostrarAlerta('error', 'Error', 'Usuario o contraseña incorrectos.')

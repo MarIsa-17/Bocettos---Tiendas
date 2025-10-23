@@ -1,4 +1,4 @@
-import { cargarDatos, guardarDatos, navegarA , logout} from "./utils.js";
+import { cargarDatos, guardarDatos, navegarA , logout, jsonToCsv, downloadCsv} from "./utils.js";
 
 if(cargarDatos('userLogged').length === 0){
   navegarA('../index.html')
@@ -40,6 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Evento al hacer clic en "Agregar Venta"
     document.getElementById('botonAgregarVenta').addEventListener('click', mostrarAgregarVenta);
+
+    agregarDescarga()
 
     document.getElementById('btnLogout').addEventListener('click', () => logout())
 
@@ -199,4 +201,20 @@ function mostrarDetallesVenta(venta) {
 
 function mostrarAgregarVenta(){
     window.location.href = 'registro-venta.html';
+}
+
+// Funcion de descarga
+function agregarDescarga(filename = "ventas.csv"){
+    // leemos el app_sales del localStorage
+    const ventas = cargarDatos('app_sales')
+    // pasamos el objeto a la funcion de descarga de PapaParse
+    const csv = jsonToCsv(ventas)
+
+    const url = downloadCsv(csv)
+
+    // le agregamos la ruta de descarga al elemento a
+    const linkDescarga = document.getElementById('btnDescargar');
+    linkDescarga.href = url
+    linkDescarga.setAttribute('download', filename);
+
 }
