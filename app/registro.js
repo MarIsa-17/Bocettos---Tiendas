@@ -1,4 +1,4 @@
-import { cargarUsuarios, mostrarAlerta } from "./utils.js";
+import { cargarUsuarios, mostrarAlerta, navegarA } from "./utils.js";
 
 const formulario = document.getElementById("formulario-registro");
 formulario.addEventListener("submit", manejarRegistro);
@@ -62,7 +62,7 @@ function manejarRegistro(event) {
     );
 
     setTimeout(() => {
-      window.location.href = "/index.html";
+      navegarA("/index.html");
     }, 3000);
   }
 }

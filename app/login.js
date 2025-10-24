@@ -1,4 +1,4 @@
-import { cargarUsuarios, guardarDatos, mostrarAlerta } from "./utils.js"
+import { cargarUsuarios, guardarDatos, mostrarAlerta, navegarA } from "./utils.js"
 
 const formulario = document.getElementById('formularioLogin')
 console.log(formulario)
@@ -26,7 +26,7 @@ function manejarLogin(event) {
 
         mostrarAlerta('success', 'Bienvenido', `Hola, ${usuarioEncontrado.usuario}!`)
         setTimeout(() => {
-            window.location.href= "/pages/lista-ventas.html"
+            navegarA("/pages/lista-ventas.html")
             },500);
 
     } else {

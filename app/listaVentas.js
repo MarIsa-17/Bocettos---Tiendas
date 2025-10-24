@@ -1,7 +1,7 @@
 import { cargarDatos, guardarDatos, navegarA , logout, jsonToCsv, downloadCsv} from "./utils.js";
 
 if(cargarDatos('userLogged').length === 0){
-  navegarA('../index.html')
+  navegarA('/index.html')
 }
 
 const OPCIONES_VENTA = {

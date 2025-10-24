@@ -1,7 +1,7 @@
 import { cargarDatos, guardarDatos, renderDetalleVenta, generarIdVenta, mostrarAlerta, navegarA, logout } from "./utils.js";
 
 if(cargarDatos('userLogged').length === 0){
-  navegarA('../index.html')
+  navegarA('/index.html')
 }
 
 // Datos de los selects de venta
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btnAgregarProducto').addEventListener('click', agregarProducto);
     document.getElementById('productoSelect').addEventListener('change', poblarDatosProducto);
     document.getElementById('ventaForm').addEventListener('submit', handleRegistrarVenta);
-    document.getElementById('btnRegresar').addEventListener('click', () => navegarA('lista-ventas.html'))
+    document.getElementById('btnRegresar').addEventListener('click', () => navegarA('/pages/lista-ventas.html'))
     document.getElementById('btnLogout').addEventListener('click', () => logout())
 
     renderDetalleVenta(productosVentaActual, true, eliminarProductoDetalle);

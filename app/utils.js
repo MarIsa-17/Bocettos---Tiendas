@@ -1,58 +1,56 @@
-export function cargarUsuarios (){
-    const usuarios = localStorage.getItem('usuarios')
-    return usuarios ? JSON.parse(usuarios) : []
+export function cargarUsuarios() {
+  const usuarios = localStorage.getItem("usuarios");
+  return usuarios ? JSON.parse(usuarios) : [];
 }
 
 // Cargar datos desde el local storage
 export function cargarDatos(key) {
-    const dataJSON = localStorage.getItem(key);
-    return dataJSON ? JSON.parse(dataJSON) : [];
+  const dataJSON = localStorage.getItem(key);
+  return dataJSON ? JSON.parse(dataJSON) : [];
 }
 
 // eliminar un elemento del localStorage
 export function eliminarDatos(key) {
-    localStorage.removeItem(key);
+  localStorage.removeItem(key);
 }
-
 
 // Guardar un arreglo en el localStorage
 export function guardarDatos(key, data) {
-    localStorage.setItem(key, JSON.stringify(data));
+  localStorage.setItem(key, JSON.stringify(data));
 }
 
 // Generar un ID único para una nueva venta
 export function generarIdVenta(ventas) {
-    const myUUID = crypto.randomUUID(); //valor aleatorio
-    // Formatea el número a 4 dígitos con ceros iniciales
-    return 'V-' + myUUID;
+  const myUUID = crypto.randomUUID(); //valor aleatorio
+  // Formatea el número a 4 dígitos con ceros iniciales
+  return "V-" + myUUID;
 }
 
-
 // personalizar alertas
- export function mostrarAlerta(icono, titulo, mensaje) {
+export function mostrarAlerta(icono, titulo, mensaje) {
   Swal.fire({
     icon: icono,
     title: titulo,
     text: mensaje,
-    confirmButtonText: 'OK',
-    confirmButtonColor: '#4A4A4A',
+    confirmButtonText: "OK",
+    confirmButtonColor: "#4A4A4A",
     customClass: {
       confirmButton:
-        'text-white font-semibold rounded hover:bg-white hover:text-[#4A4A4A] transition duration-200'
+        "text-white font-semibold rounded hover:bg-white hover:text-[#4A4A4A] transition duration-200",
     },
-    background: '#ffffff', 
-    color: '#4A4A4A', 
-  })
+    background: "#ffffff",
+    color: "#4A4A4A",
+  });
 }
 
 //funcion de navegacion
-export function navegarA(ruta){
-    window.location.href = ruta
+export function navegarA(ruta) {
+  window.location.href = ruta;
 }
 
-export function logout(){
-    eliminarDatos('userLogged');
-    window.location.href = "../index.html"
+export function logout() {
+  eliminarDatos("userLogged");
+  navegarA("/index.html");
 }
 
 /**
@@ -61,11 +59,11 @@ export function logout(){
  * @param {Object} venta - El objeto de venta.
  */
 export function llenarDatosVenta(venta) {
-    document.getElementById("canalVenta").value = venta.canal_venta || '';
-    document.getElementById("tipoVenta").value = venta.tipo_venta || '';
-    document.getElementById("medioPago").value = venta.medio_pago || '';
-    document.getElementById("tipoEntrega").value = venta.tipo_entrega || '';
-    document.getElementById("comentario").value = venta.comentario || '';
+  document.getElementById("canalVenta").value = venta.canal_venta || "";
+  document.getElementById("tipoVenta").value = venta.tipo_venta || "";
+  document.getElementById("medioPago").value = venta.medio_pago || "";
+  document.getElementById("tipoEntrega").value = venta.tipo_entrega || "";
+  document.getElementById("comentario").value = venta.comentario || "";
 }
 
 /**
@@ -73,12 +71,15 @@ export function llenarDatosVenta(venta) {
  * @param {Object} venta - El objeto de venta con la propiedad 'cliente'.
  */
 export function llenarDatosCliente(venta) {
-    if (!venta || !venta.cliente) return;
-    document.getElementById("clienteNombre").value = venta.cliente.nombre || '';
-    document.getElementById("clienteDNI").value = venta.cliente.dni || '';
-    document.getElementById("clienteDireccion").value = venta.cliente.direccion || '';
-    document.getElementById("clienteDistrito").value = venta.cliente.distrito || '';
-    document.getElementById("clienteProvincia").value = venta.cliente.provincia || '';
+  if (!venta || !venta.cliente) return;
+  document.getElementById("clienteNombre").value = venta.cliente.nombre || "";
+  document.getElementById("clienteDNI").value = venta.cliente.dni || "";
+  document.getElementById("clienteDireccion").value =
+    venta.cliente.direccion || "";
+  document.getElementById("clienteDistrito").value =
+    venta.cliente.distrito || "";
+  document.getElementById("clienteProvincia").value =
+    venta.cliente.provincia || "";
 }
 
 /**
@@ -89,156 +90,181 @@ export function llenarDatosCliente(venta) {
  * @param {Function} [rowClickHandler] - Función a llamar al hacer clic en una fila.
  * @returns {number} El subtotal calculado.
  */
-export function renderDetalleVenta(productos, mostrarAcciones = false, eliminarHandler = null, rowClickHandler = null) {
-    const tbody = document.getElementById("detalleVentaBody");
-    const subtotalDisplay = document.getElementById("subtotalVenta");
+export function renderDetalleVenta(
+  productos,
+  mostrarAcciones = false,
+  eliminarHandler = null,
+  rowClickHandler = null
+) {
+  const tbody = document.getElementById("detalleVentaBody");
+  const subtotalDisplay = document.getElementById("subtotalVenta");
 
-    if (!tbody || !subtotalDisplay) return 0;
+  if (!tbody || !subtotalDisplay) return 0;
 
-    tbody.innerHTML = "";
-    let subtotal = 0;
-    const colspan = mostrarAcciones ? 6 : 5;
+  tbody.innerHTML = "";
+  let subtotal = 0;
+  const colspan = mostrarAcciones ? 6 : 5;
 
-    if (!productos || productos.length === 0) {
-        const emptyRow = `<tr><td colspan="${colspan}" class="px-4 py-3 text-center text-gray-500">Aún no hay productos en la venta.</td></tr>`;
-        tbody.innerHTML = emptyRow;
-    } else {
-        productos.forEach((producto) => {
-            subtotal += producto.precio_total;
-            const precioTotalFormatted = producto.precio_total ? producto.precio_total.toFixed(2) : '0.00';
-            const precioUnitarioFormatted = producto.precio_unitario ? producto.precio_unitario.toFixed(2) : '0.00';
-            
-            // Usamos 'producto.id_producto' como un identificador único para la fila
-            const rowId = `row-${producto.id_producto}`; 
-            
-            const accionesCol = mostrarAcciones 
-                ? `<td class="px-4 py-3 text-center">
+  if (!productos || productos.length === 0) {
+    const emptyRow = `<tr><td colspan="${colspan}" class="px-4 py-3 text-center text-gray-500">Aún no hay productos en la venta.</td></tr>`;
+    tbody.innerHTML = emptyRow;
+  } else {
+    productos.forEach((producto) => {
+      subtotal += producto.precio_total;
+      const precioTotalFormatted = producto.precio_total
+        ? producto.precio_total.toFixed(2)
+        : "0.00";
+      const precioUnitarioFormatted = producto.precio_unitario
+        ? producto.precio_unitario.toFixed(2)
+        : "0.00";
+
+      // Usamos 'producto.id_producto' como un identificador único para la fila
+      const rowId = `row-${producto.id_producto}`;
+
+      const accionesCol = mostrarAcciones
+        ? `<td class="px-4 py-3 text-center">
                     <button type="button" 
                             data-id="${producto.id_producto}" 
                             class="btn-eliminar-producto text-red-500 hover:text-red-700 font-bold p-1 rounded transition duration-150">
                         🗑️
                     </button>
                   </td>`
-                  : '';
-            
-            const row = `
-                <tr id="${rowId}" class="${rowClickHandler ? 'cursor-pointer hover:bg-gray-100 transition duration-150' : ''}">
-                    <td class="px-4 py-3 border-r border-gray-200 text-sm">${producto.id_producto}</td>
-                    <td class="px-4 py-3 border-r border-gray-200 text-sm">${producto.nombre}</td>
-                    <td class="px-4 py-3 border-r border-gray-200 text-sm text-center">${producto.cantidad}</td>
+        : "";
+
+      const row = `
+                <tr id="${rowId}" class="${
+        rowClickHandler
+          ? "cursor-pointer hover:bg-gray-100 transition duration-150"
+          : ""
+      }">
+                    <td class="px-4 py-3 border-r border-gray-200 text-sm">${
+                      producto.id_producto
+                    }</td>
+                    <td class="px-4 py-3 border-r border-gray-200 text-sm">${
+                      producto.nombre
+                    }</td>
+                    <td class="px-4 py-3 border-r border-gray-200 text-sm text-center">${
+                      producto.cantidad
+                    }</td>
                     <td class="px-4 py-3 border-r border-gray-200 text-sm text-right">S/. ${precioUnitarioFormatted}</td>
                     <td class="px-4 py-3 border-r border-gray-200 text-sm text-right">S/. ${precioTotalFormatted}</td>
                     ${accionesCol}
                 </tr>
             `;
-            tbody.insertAdjacentHTML("beforeend", row);
-        });
+      tbody.insertAdjacentHTML("beforeend", row);
+    });
 
-        // Asignar eventos de eliminación
-        if (mostrarAcciones && eliminarHandler) {
-            document.querySelectorAll(".btn-eliminar-producto").forEach((button) => {
-                button.addEventListener("click", (e) => {
-                    const id_a_eliminar = e.currentTarget.getAttribute("data-id");
-                    // Llama al handler del archivo principal para manejar el array
-                    eliminarHandler(id_a_eliminar); 
-                });
-            });
-        }
-        
-        // Asignar eventos de click de fila
-        if (rowClickHandler) {
-             document.querySelectorAll("#detalleVentaBody tr").forEach((row) => {
-                // Evitamos asignar el evento a la fila vacía
-                if (row.id.startsWith('row-')) { 
-                    row.addEventListener("click", () => {
-                        const id_producto = row.id.replace("row-", "");
-                        rowClickHandler(id_producto);
-                    });
-                }
-            });
-        }
+    // Asignar eventos de eliminación
+    if (mostrarAcciones && eliminarHandler) {
+      document.querySelectorAll(".btn-eliminar-producto").forEach((button) => {
+        button.addEventListener("click", (e) => {
+          const id_a_eliminar = e.currentTarget.getAttribute("data-id");
+          // Llama al handler del archivo principal para manejar el array
+          eliminarHandler(id_a_eliminar);
+        });
+      });
     }
 
-    subtotalDisplay.textContent = `S/.${subtotal.toFixed(2)}`;
-    return subtotal;
+    // Asignar eventos de click de fila
+    if (rowClickHandler) {
+      document.querySelectorAll("#detalleVentaBody tr").forEach((row) => {
+        // Evitamos asignar el evento a la fila vacía
+        if (row.id.startsWith("row-")) {
+          row.addEventListener("click", () => {
+            const id_producto = row.id.replace("row-", "");
+            rowClickHandler(id_producto);
+          });
+        }
+      });
+    }
+  }
+
+  subtotalDisplay.textContent = `S/.${subtotal.toFixed(2)}`;
+  return subtotal;
 }
 
 // funciones de descarga de csv
 /**
- * 💡 Función que transforma un array de objetos JSON, que pueden tener 
+ * 💡 Función que transforma un array de objetos JSON, que pueden tener
  * propiedades anidadas (como 'cliente' y 'productos'), a una cadena de texto CSV.
  * Asume que el objetivo es tener una fila por producto vendido.
  * @param {Array<Object>} data - El array de objetos de venta.
  * @returns {string} La cadena de texto en formato CSV.
  */
 export function jsonToCsv(data) {
-    if (!data || data.length === 0) return '';
+  if (!data || data.length === 0) return "";
 
-    const DELIMITER = ';';
+  const DELIMITER = ";";
 
-    // 1. Obtener y normalizar las cabeceras
-    const headerSet = new Set();
-    const normalizedData = [];
+  // 1. Obtener y normalizar las cabeceras
+  const headerSet = new Set();
+  const normalizedData = [];
 
-    data.forEach(venta => {
-        // Campos de Venta (primer nivel, excepto 'cliente' y 'productos')
-        const ventaKeys = Object.keys(venta).filter(k => k !== 'cliente' && k !== 'productos');
+  data.forEach((venta) => {
+    // Campos de Venta (primer nivel, excepto 'cliente' y 'productos')
+    const ventaKeys = Object.keys(venta).filter(
+      (k) => k !== "cliente" && k !== "productos"
+    );
 
-        // Normalizar los campos de venta para cada producto
-        venta.productos.forEach(producto => {
-            const row = {};
+    // Normalizar los campos de venta para cada producto
+    venta.productos.forEach((producto) => {
+      const row = {};
 
-            // 1. Agregar campos de la venta principal
-            ventaKeys.forEach(key => {
-                row[key] = venta[key];
-                headerSet.add(key);
-            });
+      // 1. Agregar campos de la venta principal
+      ventaKeys.forEach((key) => {
+        row[key] = venta[key];
+        headerSet.add(key);
+      });
 
-            // 2. Agregar campos del cliente (aplanados)
-            Object.keys(venta.cliente).forEach(key => {
-                const newKey = `cliente_${key}`; // Ej: cliente_nombre
-                row[newKey] = venta.cliente[key];
-                headerSet.add(newKey);
-            });
+      // 2. Agregar campos del cliente (aplanados)
+      Object.keys(venta.cliente).forEach((key) => {
+        const newKey = `cliente_${key}`; // Ej: cliente_nombre
+        row[newKey] = venta.cliente[key];
+        headerSet.add(newKey);
+      });
 
-            // 3. Agregar campos del producto (aplanados)
-            Object.keys(producto).forEach(key => {
-                const newKey = `producto_${key}`; // Ej: producto_nombre
-                row[newKey] = producto[key];
-                headerSet.add(newKey);
-            });
+      // 3. Agregar campos del producto (aplanados)
+      Object.keys(producto).forEach((key) => {
+        const newKey = `producto_${key}`; // Ej: producto_nombre
+        row[newKey] = producto[key];
+        headerSet.add(newKey);
+      });
 
-            normalizedData.push(row);
-        });
+      normalizedData.push(row);
+    });
+  });
+
+  const headers = Array.from(headerSet);
+
+  // 2. Construir la cadena CSV
+  // Cabecera:
+  let csv = headers.join(DELIMITER) + "\n";
+
+  // Filas:
+  normalizedData.forEach((row) => {
+    const values = headers.map((header) => {
+      const value = row[header];
+      // Asegurar que comas, punto y comas y saltos de línea dentro del valor sean escapados con comillas dobles
+      const stringValue =
+        value === undefined || value === null ? "" : String(value);
+      // 🚨 Modificado: Ahora también verificamos el DELIMITER (;)
+      const needsQuotes =
+        stringValue.includes(DELIMITER) ||
+        stringValue.includes('"') ||
+        stringValue.includes("\n");
+
+      if (needsQuotes) {
+        // Escapar comillas dobles con otra comilla doble, y luego envolver en comillas
+        return `"${stringValue.replace(/"/g, '""')}"`;
+      }
+      return stringValue;
     });
 
-    const headers = Array.from(headerSet);
+    // 2️⃣ USAR DELIMITER (;) al unir los valores de la fila
+    csv += values.join(DELIMITER) + "\n";
+  });
 
-    // 2. Construir la cadena CSV
-    // Cabecera:
-    let csv = headers.join(DELIMITER) + '\n';
-
-    // Filas:
-    normalizedData.forEach(row => {
-        const values = headers.map(header => {
-            const value = row[header];
-            // Asegurar que comas, punto y comas y saltos de línea dentro del valor sean escapados con comillas dobles
-            const stringValue = (value === undefined || value === null) ? '' : String(value);
-            // 🚨 Modificado: Ahora también verificamos el DELIMITER (;)
-            const needsQuotes = stringValue.includes(DELIMITER) || stringValue.includes('"') || stringValue.includes('\n');
-            
-            if (needsQuotes) {
-                // Escapar comillas dobles con otra comilla doble, y luego envolver en comillas
-                return `"${stringValue.replace(/"/g, '""')}"`;
-            }
-            return stringValue;
-        });
-        
-        // 2️⃣ USAR DELIMITER (;) al unir los valores de la fila
-        csv += values.join(DELIMITER) + '\n';
-    });
-
-    return csv;
+  return csv;
 }
 
 /**
@@ -247,10 +273,10 @@ export function jsonToCsv(data) {
  * @param {string} filename - El nombre del archivo a descargar.
  */
 export function downloadCsv(csvString) {
-    // Crear un Blob (Binary Large Object) para el archivo CSV.
-    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+  // Crear un Blob (Binary Large Object) para el archivo CSV.
+  const blob = new Blob([csvString], { type: "text/csv;charset=utf-8;" });
 
-    const url = URL.createObjectURL(blob);
-    
-    return url;
+  const url = URL.createObjectURL(blob);
+
+  return url;
 }

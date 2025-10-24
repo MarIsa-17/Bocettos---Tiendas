@@ -13,9 +13,9 @@ import {
 
 //comprobamos si estamos loggeados
 if(cargarDatos('userLogged').length === 0){
-  navegarA("../index.html");
+  navegarA("/index.html");
 } else if (cargarDatos('ventaSeleccionada').length === 0){
-  navegarA("./lista-ventas.html")
+  navegarA("/pages/lista-ventas.html")
 }
 
 
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("ventaForm")
     .addEventListener("submit", actualizarVenta);
     
-  document.getElementById('btnRegresar').addEventListener('click', () => navegarA('detalle-venta.html'))
+  document.getElementById('btnRegresar').addEventListener('click', () => navegarA('/pages/detalle-venta.html'))
   document.getElementById('btnLogout').addEventListener('click', () => logout())
 });
 
@@ -357,7 +357,7 @@ function actualizarVenta(event) {
     );
     
     setTimeout(() => {
-        navegarA('detalle-venta.html'); // Volver al detalle para ver los cambios
+        navegarA('/pages/detalle-venta.html'); // Volver al detalle para ver los cambios
     }, 1500);
 
   } else {
