@@ -37,7 +37,7 @@ const OPCIONES_VENTA = {
   tipoEntrega: ["Recojo en Tienda", "Envío local", "Envío nacional"],
 };
 
-const INVENTORY_PATH = "/csvs/inventario.csv";
+const INVENTORY_PATH = "../csvs/inventario.csv";
 // Variable para el inventario cargado del CSV
 let inventarioProductos = [];
 

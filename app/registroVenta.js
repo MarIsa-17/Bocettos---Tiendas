@@ -19,7 +19,7 @@ let productosVentaActual = [];
 
 // Constantes a usar
 const SALES_KEY = 'app_sales'; 
-const INVENTORY_PATH = '/csvs/inventario.csv';
+const INVENTORY_PATH = '../csvs/inventario.csv';
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Inicializar Selects de Datos de Venta
