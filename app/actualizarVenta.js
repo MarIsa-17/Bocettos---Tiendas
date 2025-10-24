@@ -353,7 +353,7 @@ function actualizarVenta(event) {
     mostrarAlerta(
       "success",
       "¡Venta Actualizada!",`
-      La venta ${ventaActualizada.id_venta} ha sido modificada exitosamente.`
+      La venta ha sido modificada exitosamente.`
     );
     
     setTimeout(() => {
