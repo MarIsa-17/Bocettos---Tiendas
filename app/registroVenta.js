@@ -239,7 +239,7 @@ function handleRegistrarVenta(event) {
 
     Swal.fire({
         title: '¡Venta Registrada!',
-        html: `La venta <strong>${nuevaVenta.id_venta}</strong> ha sido guardada exitosamente en LocalStorage.`,
+        html: `La venta ha sido guardada exitosamente en LocalStorage.`,
         icon: 'success',
         confirmButtonText: 'OK',
         confirmButtonColor: '#4A4A4A',

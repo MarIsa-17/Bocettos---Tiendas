@@ -1,43 +1,68 @@
-import { cargarUsuarios, mostrarAlerta } from "./utils.js"
+import { cargarUsuarios, mostrarAlerta } from "./utils.js";
 
-const formulario = document.getElementById('formulario-registro')
-formulario.addEventListener('submit', manejarRegistro)
+const formulario = document.getElementById("formulario-registro");
+formulario.addEventListener("submit", manejarRegistro);
 
 function guardarUsuarios(usuarios) {
-    localStorage.setItem('usuarios', JSON.stringify(usuarios))
+  localStorage.setItem("usuarios", JSON.stringify(usuarios));
 }
 
-function manejarRegistro (event){
-    event.preventDefault()
-    const usuario = document.getElementById('usuario').value.trim()
-    const password = document.getElementById('password').value
-    const confirmPassword = document.getElementById('confirmPassword').value
+function manejarRegistro(event) {
+  event.preventDefault();
+  const usuario = document.getElementById("usuario").value.trim();
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
 
-    if (password !== confirmPassword) {
-        mostrarAlerta('error','Error', 'Las contraseñas no coinciden.')
-        return;
-    }
-    const nuevoUsuario = {
-        usuario: usuario,
-        password: password,
-        fechaRegistro: new Date().toISOString().slice(0,10)
-    }
+  if (password !== confirmPassword) {
+    mostrarAlerta("error", "Error", "Las contraseñas no coinciden.");
+    return;
+  }
 
-    let usuarios = cargarUsuarios()
+  // Formateamos a fecha peruana
+  const fechaActual = new Date();
 
-    const usuarioExistente = usuarios.find(user => user.usuario === nuevoUsuario.usuario)
+  // 🇵🇪 Zona Horaria de Lima, Perú (UTC-5)
+  const opciones = {
+    timeZone: "America/Lima",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  };
 
-    if(usuarioExistente){
-        mostrarAlerta('error','Error', `🚫 El usuario "${nuevoUsuario.usuario}" ya existe.`)
-    } else {
-        usuarios.push(nuevoUsuario)
-        guardarUsuarios(usuarios)
+  // Usamos 'en-CA' (Inglés de Canadá) porque su formato estándar es 'YYYY-MM-DD'
+  const fechaPeru = fechaActual.toLocaleString("en-CA", opciones);
 
-        mostrarAlerta('success', '¡Registro Exitoso!', 'El usuario fue guardado correctamente(LocalStorage).')
+  const nuevoUsuario = {
+    usuario: usuario,
+    password: password,
+    // fechaRegistro: new Date().toISOString().slice(0, 10),
+    fechaRegistro: fechaPeru,
+  };
 
-        setTimeout(() => {
-        window.location.href= "/index.html"
-        },3000);
-    }
-    
+  let usuarios = cargarUsuarios();
+
+  const usuarioExistente = usuarios.find(
+    (user) => user.usuario === nuevoUsuario.usuario
+  );
+
+  if (usuarioExistente) {
+    mostrarAlerta(
+      "error",
+      "Error",
+      `🚫 El usuario "${nuevoUsuario.usuario}" ya existe.`
+    );
+  } else {
+    usuarios.push(nuevoUsuario);
+    guardarUsuarios(usuarios);
+
+    mostrarAlerta(
+      "success",
+      "¡Registro Exitoso!",
+      "El usuario fue guardado correctamente(LocalStorage)."
+    );
+
+    setTimeout(() => {
+      window.location.href = "/index.html";
+    }, 3000);
+  }
 }
