@@ -11,9 +11,9 @@ import {
 } from "./utils.js";
 
 if(cargarDatos('userLogged').length === 0){
-  navegarA("/index.html");
+  navegarA("../index.html");
 } else if (cargarDatos('ventaSeleccionada').length === 0){
-  navegarA("/pages/lista-ventas.html")
+  navegarA("./lista-ventas.html")
 }
 
 
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document
     .getElementById("btnRegresar")
-    .addEventListener("click", () => navegarA("/pages/lista-ventas.html"));
+    .addEventListener("click", () => navegarA("./lista-ventas.html"));
 
   document
     .getElementById("btnLogout")

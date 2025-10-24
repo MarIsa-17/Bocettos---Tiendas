@@ -62,7 +62,7 @@ function manejarRegistro(event) {
     );
 
     setTimeout(() => {
-      navegarA("/index.html");
+      navegarA("../index.html");
     }, 3000);
   }
 }

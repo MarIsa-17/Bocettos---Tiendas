@@ -50,7 +50,7 @@ export function navegarA(ruta) {
 
 export function logout() {
   eliminarDatos("userLogged");
-  navegarA("/index.html");
+  navegarA("../index.html");
 }
 
 /**
