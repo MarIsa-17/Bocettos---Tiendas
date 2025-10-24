@@ -26,7 +26,7 @@ function manejarLogin(event) {
 
         mostrarAlerta('success', 'Bienvenido', `Hola, ${usuarioEncontrado.usuario}!`)
         setTimeout(() => {
-            navegarA("../pages/lista-ventas.html")
+            navegarA("./pages/lista-ventas.html")
             },500);
 
     } else {
