@@ -40,8 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // 3. Asignar Eventos
   //evento del input de DNI / RUC
   document
-    .getElementById("clienteDNI")
-    .addEventListener("keydown", buscarDatosCliente);
+    .getElementById("btnConsultarDatos")
+    .addEventListener("click", buscarDatosCliente);
   document
     .getElementById("btnAgregarProducto")
     .addEventListener("click", agregarProducto);
@@ -211,32 +211,34 @@ function agregarProducto() {
 }
 
 // Fetchear datos de cliente
-async function buscarDatosCliente(event) {
-  console.log(event.key);
-  if (event.key == "Enter") {
-    //buscamos la data
-    const documento = document.getElementById("clienteDNI").value.trim();
-    const dataCliente = await fetchDatosCliente(documento);
+async function buscarDatosCliente() {
+  //buscamos la data
+  const documento = document.getElementById("clienteDNI").value.trim();
+  const dataCliente = await fetchDatosCliente(documento);
 
-    if (!dataCliente) {
-      mostrarAlerta(
-        "error",
-        "Error",
-        "Documento no encontrado, llene manualmente."
-      );
-      return;
-    }
+  if (!dataCliente) {
+    mostrarAlerta(
+      "error",
+      "Error",
+      "Documento no encontrado, llene manualmente."
+    );
+    return;
+  }
 
-    // llenamos los campos
-    document.getElementById("clienteNombre").value = dataCliente.first_name
-      ? `${dataCliente.first_name} ${dataCliente.first_last_name} ${dataCliente.second_last_name}`
-      : dataCliente.razon_social;
+  // llenamos los campos
+  document.getElementById("clienteNombre").value = dataCliente.first_name
+    ? `${dataCliente.first_name} ${dataCliente.first_last_name} ${dataCliente.second_last_name}`
+    : dataCliente.razon_social;
 
-    if (dataCliente.razon_social) {
-      document.getElementById("clienteDireccion").value = dataCliente.direccion
-      document.getElementById("clienteDistrito").value = dataCliente.distrito
-      document.getElementById("clienteProvincia").value = dataCliente.departamento
-    }
+  if (dataCliente.razon_social) {
+    document.getElementById("clienteDireccion").value = dataCliente.direccion;
+    document.getElementById("clienteDistrito").value = dataCliente.distrito;
+    document.getElementById("clienteProvincia").value =
+      dataCliente.departamento;
+  } else {
+    document.getElementById("clienteDireccion").value = ""
+    document.getElementById("clienteDistrito").value = ""
+    document.getElementById("clienteProvincia").value = ""
   }
 }
 
